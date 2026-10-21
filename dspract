@@ -13,28 +13,28 @@ students = [
 [4, "Sneha", 20, "BSc CS"]
 ]
 with open(csv_file, "w", newline="", encoding="utf-8") as f:
-writer = csv.writer(f)
-writer.writerows(students)
+    writer = csv.writer(f)
+    writer.writerows(students)
 print("Sample CSV file created", csv_file)
 #step2 : convert csv to HOURS format
 def csv_to_hours(input_file, output_file):
-records =[]
-with open(input_file, "r") as f:
-reader = csv.DictReader(f)
-for row in reader:
-records.append({
-"type":"record",
-"data": dict(row)
-})
-hours = {
-"horus_version":"1.0",
-"source_format": "CSV",
-"records":records
-}
-#save hours outpout
-with open(output_file,"w",encoding="utf-8") as f:
-json.dump(hours, f, indent = 4)
-return hours
+    records =[]
+    with open(input_file, "r") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            records.append({
+                "type":"record",
+                "data": dict(row)
+            })
+    hours = {
+        "horus_version":"1.0",
+        "source_format": "CSV",
+        "records":records
+    }
+    #save hours outpout
+    with open(output_file,"w",encoding="utf-8") as f:
+        json.dump(hours, f, indent = 4)
+    return hours
 #step 3: perform converstion
 output_file = "students_horus.json"
 horus_data = csv_to_hours(csv_file, output_file)
@@ -83,39 +83,39 @@ xml_data = """<?xml version="1.0" encoding="UTF-8"?>
 </student>
 </students>"""
 with open(xml_file, "w", encoding="utf-8") as f:
-f.write(xml_data)
+    f.write(xml_data)
 print(f"Sample XML file create", xml_file)
 #step 2: convert XML elements into python dictionary
 def xml_to_dict(elements):
 # If the elements has no child elements
-if(len(elements)) == 0:
-return elements.text.strip() if elements.text else ""
-data = {}
-for child in elements:
-child_data = xml_to_dict(child)
-#Handle repeated elements
-if child.tag in data:
-if not isinstance(data[child.tag], list):
-data[child.tag] = [data[child.tag]]
-data[child.tag].append(child_data)
-else:
-data[child.tag] = child_data
-return data
+    if(len(elements)) == 0:
+        return elements.text.strip() if elements.text else ""
+    data = {}
+    for child in elements:
+        child_data = xml_to_dict(child)
+        #Handle repeated elements
+        if child.tag in data:
+            if not isinstance(data[child.tag], list):
+                data[child.tag] = [data[child.tag]]
+            data[child.tag].append(child_data)
+        else:
+            data[child.tag] = child_data
+    return data
 #sTEP 3: convert xml to horus
 def xml_to_horus(input_file, output_file):
-tree = ET.parse(input_file)
-root = tree.getroot()
-data = xml_to_dict(root)
-horus = {
-"horus_version":"1.0",
-"source_format":"XML",
-"root":root.tag,
-"data":data
-}
-#save horus output
-with open(output_file, "w", encoding="utf-8") as f:
-json.dump(horus, f, indent=4)
-return horus
+    tree = ET.parse(input_file)
+    root = tree.getroot()
+    data = xml_to_dict(root)
+    horus = {
+        "horus_version":"1.0",
+        "source_format":"XML",
+        "root":root.tag,
+        "data":data
+    }
+    #save horus output
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(horus, f, indent=4)
+    return horus
 # Step4 : perform conversion
 output_file = "students_horus.xml.json"
 horus_data = xml_to_horus(xml_file, output_file)
@@ -161,29 +161,29 @@ data = [
 ]
 #step2: save data in json format
 with open("students.json","w") as file:
-json.dump(data, file, indent=4)
+    json.dump(data, file, indent=4)
 print("JSON file created successfully")
 #step3: rea json data
 with open("students.json","r") as file:
-json_data = json.load(file)
+    json_data = json.load(file)
 print("Original json data:")
 print(json.dumps(json_data, indent=4))
 #Step 4: convert json data to sample HORUS text
 def convert_to_horus(records):
-horus_records=[]
-for record in records:
-fields = []
-for key, value in record.items():
-fields.append(f"{key}={value}")
-horus_records.append(" | ".join(fields))
-return "\n".join(horus_records)
+    horus_records=[]
+    for record in records:
+        fields = []
+        for key, value in record.items():
+            fields.append(f"{key}={value}")
+        horus_records.append(" | ".join(fields))
+    return "\n".join(horus_records)
 horus_data = convert_to_horus(json_data)
 #step5 display converted data
 print("\n Converted HORUS Data: ")
 print(horus_data)
 #step 6: save outpout to horus file
 with open("students.hours", "w") as file:
-file.write(horus_data)
+    file.write(horus_data)
 print("\nConversion completed successfully!")
 print("Output saved as students.hours")
 #step7: Download the output file
@@ -302,16 +302,16 @@ video_path = "/content/"+video_name
 #create temperory founder for frames
 frame_folder = "/content/temp"
 if os.path.exists(frame_folder):
-shutil.rmtree(frame_folder)
+    shutil.rmtree(frame_folder)
 os.makedirs(frame_folder)
 print("\nStart Movie to Frames")
 #step 3: open video
 vidcap = cv2.VideoCapture(video_path)
 if not vidcap.isOpened():
-raise ValueError("Unable to open video, please upload a valid video file")
+    raise ValueError("Unable to open video, please upload a valid video file")
 fps = vidcap.get(cv2.CAP_PROP_FPS)
 if fps <= 0:
-fps = 30
+    fps = 30
 total_frames = int(vidcap.get(cv2.CAP_PROP_FRAME_COUNT))
 duration = total_frames/fps
 print("Video FPS ", fps)
@@ -322,16 +322,16 @@ frame_interval = max(1, int(fps))
 count = 0
 frame_number = 0
 while True:
-success, image = vidcap.read()
-if not success:
-break
-if frame_number % frame_interval == 0:
-frame_path = os.path.join(
-frame_folder,f"frame-{count:04d}.jpg"
-)
-cv2.imwrite(frame_path,image)
-count += 1
-frame_number += 1
+    success, image = vidcap.read()
+    if not success:
+        break
+    if frame_number % frame_interval == 0:
+        frame_path = os.path.join(
+            frame_folder,f"frame-{count:04d}.jpg"
+        )
+        cv2.imwrite(frame_path,image)
+        count += 1
+    frame_number += 1
 vidcap.release()
 print("\nGenerated", count, "frames")
 print("Movie to Frames - Done")
@@ -340,30 +340,30 @@ print("Start Frames to HORUS")
 records = []
 #Resize each frame to keep output manageable
 for frame_file in sorted(os.listdir(frame_folder)):
-if not frame_file.lower().endswith((".jpg", ".jpeg", ".png")):
-continue
-frame_path = os.path.join(frame_folder, frame_file)
-image = cv2.imread(frame_path)
-if image is None:
-continue
-#Resize image
-image = cv2.resize(image, (32, 32))
-#convert BGR to RGB
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-height, width, channels = image.shape
-#read every pixel
-for y in range(height):
-for x in range(width):
-red, green, blue = image[y, x]
-records.append({
-"XAxis": x,
-"YAxis": y,
-"Red": red,
-"Green": green,
-"Blue": blue,
-"Alpha": 255,
-"FileName": frame_file
-})
+    if not frame_file.lower().endswith((".jpg", ".jpeg", ".png")):
+        continue
+    frame_path = os.path.join(frame_folder, frame_file)
+    image = cv2.imread(frame_path)
+    if image is None:
+        continue
+    #Resize image
+    image = cv2.resize(image, (32, 32))
+    #convert BGR to RGB
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    height, width, channels = image.shape
+    #read every pixel
+    for y in range(height):
+        for x in range(width):
+            red, green, blue = image[y, x]
+            records.append({
+                "XAxis": x,
+                "YAxis": y,
+                "Red": red,
+                "Green": green,
+                "Blue": blue,
+                "Alpha": 255,
+                "FileName": frame_file
+            })
 #step 5: create horus Dataframe
 columns = [
 "XAxis",
@@ -598,12 +598,12 @@ plt.xticks(rotation = 0)
 plt.show
 G_abdulrahman = nx.Graph()
 for customer in hub_customer_ar["CustomerID"]:
-G_abdulrahman.add_node(customer,type="Customer")
+    G_abdulrahman.add_node(customer,type="Customer")
 for _, row in link_customer_ar.iterrows():
-customer_id = row["CustomerID"]
-order_id = row["OrderID"]
-G_abdulrahman.add_node(order_id,node_type="Order")
-G_abdulrahman.add_edge(customer_id,order_id)
+    customer_id = row["CustomerID"]
+    order_id = row["OrderID"]
+    G_abdulrahman.add_node(order_id,node_type="Order")
+    G_abdulrahman.add_edge(customer_id,order_id)
 plt.figure(figsize=(10,6))
 pos_abdulrahman = nx.spring_layout(G_abdulrahman, seed = 42)
 nx.draw(
@@ -674,11 +674,11 @@ print(df_abdulrahman.duplicated().sum())
 df_abdulrahman.drop_duplicates(inplace=True)
 #Handles missing values
 for col in df_abdulrahman.columns:
-if df_abdulrahman[col].isna().sum() > 0:
-if df_abdulrahman[col].dtype == 'object':
-df_abdulrahman[col].fillna(df_abdulrahman[col].mode()[0], inplace = True)
-else:
-df_abdulrahman[col].fillna(df_abdulrahman[col].mean(),inplace = True)
+    if df_abdulrahman[col].isna().sum() > 0:
+        if df_abdulrahman[col].dtype == 'object':
+            df_abdulrahman[col].fillna(df_abdulrahman[col].mode()[0], inplace = True)
+        else:
+            df_abdulrahman[col].fillna(df_abdulrahman[col].mean(),inplace = True)
 #standardize gender values
 df_abdulrahman['Gender'] = df_abdulrahman['Gender'].str.strip().str.capitalize()
 df_abdulrahman.head()
@@ -821,8 +821,8 @@ df= pd.DataFrame({
 'Purchased': purchased})
 #Introduce Missing values
 for column in ['Age', 'Salary','Education']:
-missing_rows = np.random.choice(df.index, 15, replace = False)
-df.loc[missing_rows, column] = np.nan
+    missing_rows = np.random.choice(df.index, 15, replace = False)
+    df.loc[missing_rows, column] = np.nan
 #Introduce duplicate values
 duplicates = df.sample(20, random_state=42)
 df = pd.concat([df, duplicates], ignore_index=True)
