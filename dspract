@@ -99,9 +99,11 @@ you change generate report
 ____________________________________________________________
 14. DUDE
 steps: Just open the application
+____________________________________________________________
 15. Zenmap
 steps: Give the target name eg www.google.com
 select the profile intense scan ,all TCP port
+on command enter nmap -O <all ip address>
 click the scan
 ____________________________________________________________
 16. lanstate
