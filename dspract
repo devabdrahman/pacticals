@@ -1,1 +1,139 @@
+                        Network Security Tools – Practical Lab Manual
 
+____________________________________________________________
+1. Recon-ng
+steps: recon-ng
+workspace create mscit
+db insert domain
+>certifiedhacker.com
+text:hacker website
+show domain
+marketplace search
+marketplace install recon/domain-hosts/hackertarget
+modules load recon/domain-hosts/hackertarget
+info
+run .
+____________________________________________________________
+2. Metasploit
+steps: service PostgreSQL start
+msfconsole
+db_status
+sudo msfdb init
+service PostgreSQL restart
+db_status
+nmap -T5 -O -oX Test certifiedhacker.com
+db_import Test
+hosts
+services
+____________________________________________________________
+3. Hping
+steps: sudo hping3 -c 5 google.com
+sudo hping3 --scan 1-200 -S google.com
+sudo hping --flood -S -d 20 -a 192.168.1.10 certifiedhacker.com
+____________________________________________________________
+4. Masscan
+steps: ping google.com
+note the ip address of google.com
+sudo masscan -p 80,443 ip of google
+____________________________________________________________
+5. Ads spy
+steps: open app
+tick on full scan
+click scan
+____________________________________________________________
+6. Snow
+steps:open the snow folder
+
+in the address path type cmd
+Go to cmd
+create file mydata
+command: snow -C -m "hidden message" -p "123456" mydata.txt hiddendata.txt
+to Show: snow -C -p "123456" hiddendata.txt
+____________________________________________________________
+7. Superscan
+steps: Give your ip
+Give the range of ip
+Start the scan
+go to tools option in superscan and write ip
+____________________________________________________________
+8. Hashcalc
+steps: select data format text string
+Data: hello world
+calculate
+____________________________________________________________
+9. Crypt tool
+steps: Enter message
+go to asymmetric
+and click encryption
+same for decrypte
+take the encrypted and decrypted it
+and the password is 1234
+____________________________________________________________
+10. TrueCrypt
+steps: Create the volume
+then select the file
+next
+next
+size 1000MB
+password 123456
+next
+exit
+then select file
+choose the drive
+give password
+enter
+____________________________________________________________
+11. Ping:
+steps: ping www.google.com
+ping -n 10 www.google.com
+____________________________________________________________
+12. Advance Ip scanner
+steps: open app
+
+give ip ip range 192.168.0.1-192.168.0.254
+____________________________________________________________
+13. Currport:
+steps:
+only use see the packet
+you change generate report
+____________________________________________________________
+14. DUDE
+steps: Just open the application
+15. Zenmap
+steps: Give the target name eg www.google.com
+select the profile intense scan ,all TCP port
+click the scan
+____________________________________________________________
+16. lanstate
+steps:
+open lanstste
+click file
+select first option map creation wizard
+select option 1 , next
+give range : 192.168.0.1-192.168.0.254
+next,next,next,finish
+____________________________________________________________
+17. networkview
+steps:File new
+title:mscit
+open app
+give range of ip
+done
+____________________________________________________________
+18. Colasoft
+steps: open app
+click on add
+select tcp
+click open
+change the soure ip and destination ip
+click send option
+enable loop sending
+click select option
+and in dropdown select the adapter
+before clicking start
+open wireshark
+after clicking start you will see the packet
+____________________________________________________________
+19. NetBIOS
+steps:open app
+click ip range give range
